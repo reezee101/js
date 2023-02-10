@@ -33,7 +33,7 @@
 
     <nav class="navbar navbar-light bg-light">
       <div class="container-fluid">
-        <span class="navbar-brand">Navbar</span>
+        <span class="navbar-brand">rezeShop</span>
         <span class="badge bg-dark" id="darkMode">Dark 🔄</span>
         <button class="navbar-toggler" type="button" id="btn">
           <span class="navbar-toggler-icon"></span>
@@ -56,6 +56,26 @@
     <div class="alert alert-danger" id="alert">
       <span id="cnt">5</span>
       초 이내 구입시 사은품 증정!
+    </div>
+    <div style="overflow: hidden">
+      <div class="slide-container">
+        <div class="slide-box"></div>
+        <div class="slide-box"></div>
+        <div class="slide-box"></div>
+      </div>
+    </div>
+    <button class="slide">넘기기</button>
+
+    <div style="height: 1000px">
+      <div
+        class="lorem"
+        style="width: 200px; height: 100px; overflow-y: scroll"
+      >
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae voluptas
+        voluptatum minus praesentium fugit debitis at, laborum ipsa itaque
+        placeat sit, excepturi eius. Nostrum perspiciatis, eligendi quae
+        consectetur praesentium exercitationem.
+      </div>
     </div>
 
     <script
@@ -89,13 +109,20 @@
         if (document.querySelector("#id").value == "") {
           alert("아이디를 입력하시오");
           e.preventDefault();
+          return;
         }
         if (document.querySelector("#pw").value == "") {
           alert("비밀번호를 입력하시오");
           e.preventDefault();
+          return;
         }
         if (document.querySelector("#pw").value.length < 6) {
           alert("비밀번호는 6자리 이상이어야 합니다.");
+          e.preventDefault();
+          return;
+        }
+        if (/[A-Z]/.test(document.querySelector("#pw").value) == false) {
+          alert("대문자없음");
           e.preventDefault();
         }
       });
@@ -134,6 +161,68 @@
           document.getElementById("alert").style.display = "none";
         }
       }
+
+      let pos = 0;
+      document
+        .getElementsByClassName("slide")[0]
+        .addEventListener("click", function () {
+          if (pos < 51) {
+            pos += 50;
+          } else {
+            pos = 0;
+          }
+          document.querySelector(
+            ".slide-container"
+          ).style.transform = `translate(-${pos}vw)`;
+        });
+
+      //스크롤바
+      window.addEventListener("scroll", function () {
+        window.scrollY;
+        //=window.pageYOffset
+
+        // window.scrollTo(0, 100) 강제스크롤(x, y)
+        // window.scrollBy(0, 100) 강제스크롤(x, y)
+      });
+    </script>
+    <script>
+      //Q1. 함수에 분과 초를 차례로 파라미터로 입력하면 ms단위로 바꿔서 뱉어주는 함수를 만들어봅시다.
+      console.log(returnMs(2, 10));
+
+      function returnMs(min, sec) {
+        let answer = (min * 60 + sec) * 1000;
+        return answer;
+      }
+      //Q2. 가격을 파라미터로 입력하면 10% 할인가를 뱉는 함수를 만들어봅시다.
+      console.log(returnSale(10, true));
+      function returnSale(cost, plus) {
+        let answer = cost * 0.9;
+        if (plus) {
+          answer = answer - 1.5;
+        }
+        return answer;
+      }
+
+      window.addEventListener("scroll", function () {
+        if (window.scrollY > 100) {
+          document.querySelector(".navbar-brand").style.fontSize = "20px";
+        } else {
+          document.querySelector(".navbar-brand").style.fontSize = "25px";
+        }
+      });
+
+      document.querySelector(".lorem").addEventListener("scroll", function () {
+        //console.log(document.querySelector(".lorem").scrollTop);
+        if (document.querySelector(".lorem").scrollTop > 155) {
+          alert("약관을 다 읽었습니다.");
+          return;
+        }
+      });
+
+      // document.querySelector('html').scrollHeight;  //현재 웹페이지의 실제높이
+      // document.querySelector('html').clientHeight;  //현재 웹페이지에서 보이는 높이
+      // document.querySelector('html').scrollTop;  //스크롤 얼마나 했는지
+      // = window.scrollY
     </script>
   </body>
 </html>

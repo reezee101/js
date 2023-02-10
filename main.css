@@ -36,3 +36,27 @@
     background-color: black;
     color: white;
   }
+  .slide-box{
+    width: 50vw;
+    float: left;
+    height: 10vw;
+    background-color: aquamarine;
+    margin: 1vw;
+  }
+  .slide-container{
+    width: 300vw;
+    height: 15vw;
+    background-color: silver;
+    transition: all 1s;
+    /* transform: translate(-100vw); */
+}
+
+.navbar{
+ position: fixed;   
+ width: 100%;
+}
+
+.navbar-brand{
+    font-size: 30px;
+    transition: all 0.5s;
+}
